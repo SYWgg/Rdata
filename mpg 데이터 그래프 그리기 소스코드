@@ -1,0 +1,19 @@
+install.packages("ggplot2")
+library(ggplot2)
+
+x <- c("a", "a", "b", "c", "c", "d")
+x
+qplot(x)
+
+qplot(data = mpg, x = hwy) #data에 mpg, x축에 hwy(고속주행 연비)변수 지정
+
+qplot(data = mpg, x = cty) #x축 cty(도시주행 연비)
+
+qplot(data = mpg, x = cty, y = hwy) #x축 cty(도시주행 연비), y축 hwy
+
+qplot(data = mpg, x = drv, y = hwy, geom = "line") #x축 drv, y축 hwy, 선 그래프
+형태
+
+qplot(data = mpg, x = drv, y = hwy, geom = "boxplot") #x축 drv, y축 hwy, 박스 그래프 형태
+
+qplot(data = mpg, x = drv, y = hwy, geom = "boxplot", colour = drv) #x축 drvr, y축 hwy, 박스 그래프 형태, drv별 색 표현

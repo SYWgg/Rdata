@@ -1,0 +1,17 @@
+var1 <- 2
+var1 + 2
+var1
+var4 <- seq(1, 13, by = 2.5)
+var4
+str <- "a"
+str
+str2 <- 'text'
+str2
+str3 <- "Hello! R"
+str3
+str4 <- c("c", "b", "c")
+str4
+str5 <- c("Hello", "R", "World", "!")
+str5
+str6 <- c("nice", "to", "meet", "you", "yewon")
+str6

@@ -1,0 +1,27 @@
+library(readxl)
+library(dplyr)
+y_data <- read_excel("Data_2019_mid.xlsx")
+y_data
+
+y_data %>%  select(Rdata)
+y_data %>% select(grade)
+
+y_data %>% select(Cpp, Web.P)
+
+y_data %>% select(-grade, -number)
+
+y_data %>% filter(grade == 2) %>% select(Data.St)
+
+y_data %>%
+  filter(Rdata < 90) %>% 
+  select(Cpp)
+
+y_data %>%
+  select(Data.St) %>% 
+  head
+
+y_data %>% 
+  dim
+
+y_data %>%
+  str

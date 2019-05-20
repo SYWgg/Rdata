@@ -1,0 +1,19 @@
+library(ggplot2)
+library(dplyr)
+crime <- read.csv("crime.csv")
+
+View(crime)
+str(crime)
+
+
+crime$pr_5 <- ifelse(crime$pr_5 == '-999', 0, crime$pr_5)
+crime$pr_6 <- ifelse(crime$pr_6 == '-999', 0, crime$pr_6)
+crime$pr_7 <- ifelse(crime$pr_7 == '-999', 0, crime$pr_7)
+crime$pr_8 <- ifelse(crime$pr_8 == '-999', 0, crime$pr_8)
+crime$pr_9 <- ifelse(crime$pr_9 == '-999', 0, crime$pr_9)
+
+crime[c(4, 5, 6, 7), "pr_sum"] <- NA
+table(is.na(crime$pr_sum))
+crime
+
+crime$pr_sum <- (crime$pr_1 + crime$pr_2 + crime$pr_3 + crime$pr_4 + crime$pr_5 + crime$pr_6 + crime$pr_7 + crime$pr_8 + crime$pr_9)

@@ -1,19 +1,38 @@
 library(ggplot2)
 library(dplyr)
+library(ggplot2)
+library(dplyr)
 crime <- read.csv("crime.csv")
 
-View(crime)
+head(crime)
 str(crime)
+View(crime)
 
+crime[c(4, 5, 6, 7), "pr_sum"] <- NA
+table(is.na(crime$pr_sum))
+mean(crime$pr_sum)
+crime
 
+crime %>% filter(is.na(pr_sum))
+crime_clean <- crime %>% filter(!is.na(pr_sum))
+table(is.na(crime_clean$pr_sum))
+crime_clean
+
+table(crime$pr_5)
 crime$pr_5 <- ifelse(crime$pr_5 == '-999', 0, crime$pr_5)
 crime$pr_6 <- ifelse(crime$pr_6 == '-999', 0, crime$pr_6)
 crime$pr_7 <- ifelse(crime$pr_7 == '-999', 0, crime$pr_7)
 crime$pr_8 <- ifelse(crime$pr_8 == '-999', 0, crime$pr_8)
 crime$pr_9 <- ifelse(crime$pr_9 == '-999', 0, crime$pr_9)
+boxplot(crime$pr_7)
 
-crime[c(4, 5, 6, 7), "pr_sum"] <- NA
-table(is.na(crime$pr_sum))
-crime
+boxplot(mpg$hwy)
 
 crime$pr_sum <- (crime$pr_1 + crime$pr_2 + crime$pr_3 + crime$pr_4 + crime$pr_5 + crime$pr_6 + crime$pr_7 + crime$pr_8 + crime$pr_9)
+
+
+
+
+crime %>% 
+  mutate(d = pr_sum / no_pr) %>% 
+  arrange(d)

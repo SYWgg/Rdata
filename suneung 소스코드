@@ -1,0 +1,20 @@
+library(dplyr)
+suneung <- read.csv("year_suneung.csv")
+suneung
+
+suneung %>% arrange(enter)
+suneung %>% arrange(desc(enter))
+
+suneung %>% arrange(year, apply)
+
+
+
+suneung %>% 
+  mutate(per = enter / apply * 100)
+
+suneung %>% 
+  mutate(test_num = ifelse(year >= 1995, "only one test", "two tests"))
+
+suneung %>%
+  mutate(per = enter / apply * 100) %>% 
+  arrange(desc(per))

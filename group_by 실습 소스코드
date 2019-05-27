@@ -1,0 +1,37 @@
+library(ggplot2)
+library(dplyr)
+
+ggplot(data = midwest, aes(x = reorder(state, -popasian), y = popasian)) + 
+  geom_col()
+
+ggplot(data = midwest, aes(x = poptotal)) + 
+  geom_bar()
+
+ggplot(data = Orange, aes(x = circumference)) + geom_bar()
+
+View(mpg)
+head(mpg)
+mpg <- as.data.frame(ggplot2::mpg)
+mpg %>% 
+  group_by(class) %>% 
+  summarise(mean_h = mean(hwy),
+            mean_c = mean(cty), 
+            n = n()) %>% 
+  arrange(desc(class))    //내림차순으로 정렬
+
+mpg %>% 
+  group_by(class) %>% 
+  summarise(mean_c = mean(cty)) %>% 
+  arrange(desc(mean_c))
+
+mpg %>%
+  group_by(manufacturer) %>% 
+  summarise(mean_h = mean(hwy)) %>%
+  arrange(desc(mena_h)) %>% 
+  head(3)
+
+mpg %>% 
+  filter(class =="compact") %>% 
+  group_by(manufacturer) %>% 
+  summarise(count=n()) %>% 
+  arrange(desc(count))

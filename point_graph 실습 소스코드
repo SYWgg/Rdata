@@ -1,0 +1,21 @@
+library(ggplot2)
+
+ToothGrowth    #비타민 C 투약에 따른 기니피그의 치아 성장 
+ggplot(data = TG, aes(x = dose, y = len)) + geom_point()
+
+Orange    #나무 5개의 연령, 둘레 
+ggplot(data = Orange, aes(x = age, y = circumference)) +
+  geom_point() +
+  xlim(400, 1600) +
+  ylim(50, 225)
+
+
+ggplot(data = mpg, aes(x = cty, y = hwy)) + geom_point()
+
+
+View(midwest)
+options(scipen = 99)    #축 정수로 표현하기 
+ggplot(data = midwest, aes(x = poptotal, y = popasian)) + 
+  geom_point() +
+  xlim(0, 500000) +
+  ylim(0, 10000)

@@ -1,0 +1,62 @@
+install.packages("rJava")
+install.packages("memoise")
+install.packages("KoNLP")
+library(KoNLP)
+library(dplyr)
+
+useNIADic()
+
+
+txt <- readLines("song.txt")
+
+head(txt)
+View(txt)
+str(txt)
+
+# 특수문자 제거하기 
+install.packages("stringr")
+library(stringr)
+txt <- str_replace_all(txt, "\\W", " ")
+head(txt)
+
+# 가장 많이 사용된 단어는? 
+# 1. 명사추출하기 
+extractNoun("오늘의 날씨는 맑다")
+
+nouns <- extractNoun(txt)
+
+wordcount <- table(unlist(nouns))
+
+df_word <- as.data.frame(wordcount, stringAsFactors = F)
+
+df_word <- rename(df_word,
+                  word = Var1,
+                  freq = Freq)
+
+# 자주 사용된 단어 빈도표 만들기 
+df_word$word <- as.character(df_word$word)
+df_word <- filter(df_word, nchar(word) >= 2)
+
+top20 <- df_word %>% 
+  arrange(desc(freq)) %>% 
+  head(20)
+top20
+
+# 워드 클라우드 만들기
+install.packages("wordcloud")
+library(wordcloud)
+library(RColorBrewer)
+
+pal <- brewer.pal(8, "Dark2")
+
+set.seed(1234)
+
+wordcloud(words = df_word$word,     # 단어 
+          freq = df_word$freq,      # 빈도
+          min.freq = 2,             # 최소 단어 빈도 
+          max.words = 200,          # 표현 단어 수 
+          random.order = F,         # 고빈도 단어 중앙 배치
+          rot.per = .1,             # 회전하는 단어 비율 설정 
+          scale = c(4, 0.3),        # 단어 크기 범위 설정 
+          color = pal)              # 색상 목록 
+
